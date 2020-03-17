@@ -142,6 +142,15 @@ server <- function(input, output) {
         if(input$calendar_zones == 6){zone_selections <- c(6)}
         if(input$calendar_zones == 7){zone_selections <- c(1:6)}
         
+        
+        if(input$calendar_zones == 1){location_vec <- c("Zone 1")}
+        if(input$calendar_zones == 2){location_vec <- c("Zone 2")}
+        if(input$calendar_zones == 3){location_vec <- c("Zone 3")}
+        if(input$calendar_zones == 4){location_vec <- c("Zone 4")}
+        if(input$calendar_zones == 5){location_vec <- c("Zone 5")}
+        if(input$calendar_zones == 6){location_vec <- c("Zone 6")}
+        if(input$calendar_zones == 7){location_vec <- c("Atlanta")}
+        
         calendar_input <- full_input %>%
             filter(zone %in% zone_selections) %>%
             group_by(months, monthweek, week_day, days) %>%
@@ -170,7 +179,7 @@ server <- function(input, output) {
             xlab("")+
             ylab("") + 
             theme_bw() +
-            labs(caption = "Crime Per 1,000 Residents Each Day in Atlanta 2017") +
+            labs(caption = paste("Crime Per 1,000 Residents Each Day in", location_vec)) +
             theme(axis.ticks = element_blank(),
                   axis.text.y = element_blank(),
                   panel.grid = element_blank(),
